@@ -9,6 +9,7 @@
     x: number
     y: number
   }
+
   let position: Coords | null = null
   let history: string[] = []
   let delayMs = 500
@@ -63,17 +64,7 @@
   }
 </script>
 
-<div class="grid">
-  {#each board as rows, y}
-    {#each rows as _, x}
-      <button class="cell" on:click={() => onCellClick({x, y})}>
-        {#if x === position?.x && y === position?.y}
-          <span role="img" class="icon">🐴</span>
-        {/if}
-      </button>
-    {/each}
-  {/each}
-</div>
+<Board selected={position} onCellClick={({x, y}) => onCellClick({x, y})} />
 
 <div class="controls">
   <div>
@@ -93,20 +84,6 @@
 </pre>
 
 <style>
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-  }
-
-  .cell {
-    border: 1px solid #ccc;
-    aspect-ratio: 1;
-  }
-
-  .icon {
-    font-size: 2em;
-  }
-
   .controls {
     margin-top: 1rem;
   }
